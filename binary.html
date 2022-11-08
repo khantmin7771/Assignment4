@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery Tacket Number</title>
+    <style>
+        #clientPage {width: 50%;height: 500px;background-color: rgb(65, 138, 193);}
+        #adminPage {width: 50%;height: 500px; background-color: rgb(154, 101, 204);}
+        .threeDpages {float: left;}
+    </style>
+</head>
+<body>
+    <div style="height: 20%;">
+        <h1 style="text-align:center;font-size: 50px;">
+            Test Your Luck With Lottery Ticket
+        </h1>
+    </div>
+    <div id="clientPage" class="threeDpages">
+        <div style="margin-left: 20px;">
+            <h1>Choose Your Lottery Ticket Number Here</h1>
+
+
+            <p>YourName</p> 
+            <input type="text"
+            id="nameinput"
+            style="margin-left: 30px;">
+
+
+            <p>Number</p> 
+            <input type="number" min="0" max="999"
+            id="numberinput" 
+            style="margin-left: 30px;">
+
+
+            <p>Click Here to Get Lottery Ticket Number</p>
+            <button style="margin-left: 30px;"
+            onclick="chosenNumber()">Confirm</button>
+            
+            <p  id="nameParagraph" 
+                style="width: 200px;
+                    background-color: rgb(80, 155, 221);
+                    font-size: 25px;">
+            </p>
+        </div>
+    </div>
+
+    <div id="adminPage" class="threeDpages">
+        <div style="margin-left: 20px;">
+            <h1>This Lottery Ticket Number is.... </h1> 
+            <p id="numberParagraph" 
+                style="background-color: white;
+                    width: 150px;
+                    font-size: 30px;
+                    font-style: italic;"></p>
+        </div>
+    </div>
+    <div style="height: 400px;">
+        <h1 style="text-align: center;">Rules and Regulations </h1>
+        <p style="text-align: center;">
+            Filling your name
+            <br>You can pick from 0 to 999
+            <br>You can't choose sold out tickets
+            <br>
+        </p>
+        <h1 style="text-align: center;">Content us</h1>
+        <p style="text-align: center;">
+            Gmail: khantminn7771@gmail.com <br>
+            Phone: +959975197771
+        </p>
+    </div>
+
+    <script>
+        let nameinput = document.getElementById("nameinput")
+        let nameParagraph = document.getElementById("nameParagraph")
+
+        let numberinput = document.getElementById("numberinput")
+        let numberParagraph = document.getElementById("numberParagraph")
+        let pickedNumber=[]
+
+        function arrySize(arr){
+                let sizeOfarray=0;
+                for(let i in arr){
+                    sizeOfarray++;
+                }
+                return sizeOfarray;
+            }
+
+        function numberchecking(numbertoCheck,array){
+            
+            let arraylength= arrySize(array)
+            //-----------------------------
+            for(i=0;i<=arraylength;i++){
+                console.log(`this is i=${i}`);
+                if (array[i]===numbertoCheck){
+                    return 0; //already existed
+                    break;
+                }else if(i===arraylength-1){
+                    return 1; //noequaldata in array
+                }else if(i===arraylength){
+                    return 1; //novalue in array
+                }       
+            }
+        }
+
+        function push(original,newData){
+            let arraylength= arrySize(original)
+            for(let i=0; i<=arraylength ;i++){
+                if(i===arraylength){
+                    console.log(newData)
+                    original[i]= newData
+                    return original; 
+                }
+            
+            }
+        }
+        
+        function chosenNumber(){
+            let nV=numberinput.value
+            if(nV<1000) {
+                let x = numberchecking(nV,pickedNumber)
+                if (x===0){
+                    nameParagraph.textContent=("This Lottery Ticket Number Is Sold Out!! Pick Another One")
+                    nameParagraph.style.background="rgb(190, 73, 73)"
+                    nameParagraph.style.color="white"
+                    nameParagraph.style.width="400px"
+                    nameParagraph.style.fontSize="25px"
+                    nameParagraph.style.marginLeft="0px"
+                }else if (x===1){
+                    nameParagraph.textContent=(nameinput.value+" Your Lottery Ticket Number Is "+nV)
+                    nameParagraph.style.background="rgb(104, 160, 111)"
+                    nameParagraph.style.color="white"
+                    nameParagraph.style.width="400px"
+                    nameParagraph.style.fontSize="25px"
+                    nameParagraph.style.marginLeft="0px"
+                    let chosenNumberarray = push(pickedNumber,nV)
+                    numberParagraph.textContent=chosenNumberarray
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>
